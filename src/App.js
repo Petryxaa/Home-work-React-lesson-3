@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import AllUsers from "./component/all-user/AllUsers";
+import AllUsersPost from "./component/all-user/AllUsersPost";
+import AllUsersComments from "./component/all-user/AllUsersComments";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+class App extends Component {
+  render() {
+    return (
+      
+      <Router>
+        <div>
+
+
+
+          
+          <div className="link">
+            <div>
+              <Link to={"/users"}> Users </Link>
+            </div>
+
+            <div>
+              <Link to={"/posts"}>Post</Link>
+            </div>
+
+            <div>
+              <Link to={"/comments"}>Comments</Link>
+            </div>
+          </div>
+
+          <div className={"app-route"}>
+            <Switch>
+              <Route path={"/users"}>
+              <div className="app-users">
+                <AllUsers />
+                </div>
+              </Route>
+            </Switch>
+
+            <Switch>
+              <Route path={"/posts"}>
+                <div className="app-users-post">
+                  <AllUsersPost />
+                </div>
+              </Route>
+            </Switch>
+
+            <Switch>
+              <Route>
+                <div className="coment">
+                  <Route
+                    path={"/comments"}
+                    render={(props) => {
+                      console.log(props);
+                      return <AllUsersComments />;
+                    }}
+                  />
+                </div>
+              </Route>
+            </Switch>
+          </div>
+
+
+        </div>
+      </Router>
+    );
+  }
 }
-
 export default App;
